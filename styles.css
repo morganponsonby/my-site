@@ -174,6 +174,44 @@ p {
   margin-bottom: 8px;
 }
 
+.weather-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  background: linear-gradient(135deg, #f8efe3 0%, #f2f7fa 100%);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+}
+
+.weather-main {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.weather-icon {
+  font-size: 2rem;
+}
+
+.weather-temp {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.weather-meta {
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.weather-loading,
+.weather-error {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
 .portrait {
   width: 100%;
   border-radius: 20px;
