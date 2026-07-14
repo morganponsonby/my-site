@@ -103,19 +103,21 @@ main {
 }
 
 .portrait-frame {
-  width: min(240px, 100%);
-  border-radius: 8px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
   overflow: hidden;
   border: 1px solid var(--border);
   box-shadow: 0 12px 30px rgba(15, 23, 42, 0.08);
+  background: #e8eef7;
 }
 
 .portrait-frame img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 5;
+  height: 100%;
   object-fit: cover;
+  object-position: center 20%;
 }
 
 .eyebrow {
@@ -159,7 +161,21 @@ p {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  margin-top: 20px;
+  margin-top: 8px;
+}
+
+.skills-group {
+  margin-top: 4px;
+  padding-top: 8px;
+}
+
+.skills-label {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
 }
 
 .pill {
@@ -272,7 +288,30 @@ p {
 }
 
 .work-item {
+  display: flex;
+  gap: 20px;
+  align-items: center;
   padding: 24px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
+}
+
+.work-item:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(15, 23, 42, 0.1);
+  border-color: var(--accent);
+}
+
+.work-thumb {
+  width: 120px;
+  height: 120px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #dcecff 0%, #f8ebdb 100%);
+  flex-shrink: 0;
+}
+
+.work-copy {
+  flex: 1;
 }
 
 .cta-link {
@@ -330,5 +369,15 @@ footer {
   nav {
     flex-direction: column;
     gap: 12px;
+  }
+
+  .work-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .work-thumb {
+    width: 100%;
+    height: 140px;
   }
 }
