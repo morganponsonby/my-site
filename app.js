@@ -15,47 +15,45 @@ function getWeatherEmoji(code) {
 }
 
 function updateWeather(errorMessage) {
+  if (!weatherTemp || !weatherFeels || !weatherLocation || !weatherIcon) return;
+
   weatherTemp.textContent = '--°F';
   weatherFeels.textContent = 'Feels like --°F';
   weatherLocation.textContent = errorMessage;
   weatherIcon.textContent = '🌦️';
 }
 
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(
-      async (position) => {
-        try {
-          const lat = position.coords.latitude;
-          const lon = position.coords.longitude;
-          const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,apparent_temperature,weather_code&temperature_unit=fahrenheit&timezone=auto`);
+if (navigator.geolocation) {
+  navigator.geolocation.getCurrentPosition(
+    async (position) => {
+      try {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+        const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=temperature_2m,apparent_temperature,weather_code&temperature_unit=fahrenheit&timezone=auto`);
 
-          if (!response.ok) {
-            throw new Error('Weather request failed');
-          }
-
-          const data = await response.json();
-          const current = data.current;
-          const temperature = Math.round(current.temperature_2m);
-          const feelsLike = Math.round(current.apparent_temperature);
-          const condition = getWeatherEmoji(current.weather_code);
-          const locationText = data.timezone ? data.timezone.replace(/_/g, ' ') : 'Your location';
-
-          weatherIcon.textContent = condition;
-          weatherTemp.textContent = `${temperature}°F`;
-          weatherFeels.textContent = `Feels like ${feelsLike}°F`;
-          weatherLocation.textContent = locationText;
-        } catch (error) {
-          updateWeather('Weather unavailable');
+        if (!response.ok) {
+          throw new Error('Weather request failed');
         }
-      },
-      () => {
-        weatherIcon.textContent = '🌦️';
-        weatherTemp.textContent = '--°F';
-        weatherFeels.textContent = 'Feels like --°F';
-        weatherLocation.textContent = 'I need your location to pull up the weather in your area :)';
+
+        const data = await response.json();
+        const current = data.current;
+        const temperature = Math.round(current.temperature_2m);
+        const feelsLike = Math.round(current.apparent_temperature);
+        const condition = getWeatherEmoji(current.weather_code);
+        const locationText = data.timezone ? data.timezone.replace(/_/g, ' ') : 'Your location';
+
+        weatherIcon.textContent = condition;
+        weatherTemp.textContent = `${temperature}°F`;
+        weatherFeels.textContent = `Feels like ${feelsLike}°F`;
+        weatherLocation.textContent = locationText;
+      } catch (error) {
+        updateWeather('Weather unavailable');
       }
-    );
-  } else {
-    updateWeather('Geolocation not supported');
-  }
+    },
+    () => {
+      updateWeather('I need your location to pull up the weather in your area :)');
+    }
+  );
+} else {
+  updateWeather('Geolocation not supported');
 }
