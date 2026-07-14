@@ -76,7 +76,7 @@ main {
 .work-item {
   background: var(--panel);
   border: 1px solid var(--border);
-  border-radius: 24px;
+  border-radius: 8px;
   box-shadow: 0 16px 48px rgba(31, 41, 51, 0.08);
 }
 
@@ -96,7 +96,7 @@ main {
 
 .portrait-frame {
   width: min(240px, 100%);
-  border-radius: 20px;
+  border-radius: 8px;
   overflow: hidden;
   border: 1px solid var(--border);
   box-shadow: 0 12px 30px rgba(31, 41, 51, 0.1);
@@ -182,7 +182,7 @@ p {
   padding: 20px;
   background: linear-gradient(135deg, #f8efe3 0%, #f2f7fa 100%);
   border: 1px solid var(--border);
-  border-radius: 20px;
+  border-radius: 8px;
 }
 
 .weather-main {
@@ -201,6 +201,18 @@ p {
   color: var(--text);
 }
 
+.weather-temp-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.weather-feels {
+  font-size: 0.95rem;
+  color: var(--muted);
+}
+
 .weather-meta {
   color: var(--muted);
   font-size: 0.95rem;
@@ -214,7 +226,7 @@ p {
 
 .portrait {
   width: 100%;
-  border-radius: 20px;
+  border-radius: 8px;
   min-height: 260px;
   background: linear-gradient(135deg, #d8e8ee 0%, #f7e8d5 100%);
   border: 1px solid var(--border);
@@ -243,6 +255,16 @@ p {
 
 .work-item {
   padding: 24px;
+}
+
+.cta-link {
+  display: inline-block;
+  margin-top: 12px;
+  padding: 9px 14px;
+  background: var(--accent);
+  color: #fff;
+  border-radius: 8px;
+  font-weight: 600;
 }
 
 .work-item .meta {
